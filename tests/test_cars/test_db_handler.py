@@ -70,6 +70,6 @@ def test_get_popular_cars():
     
     result = db_handler.get_popular_cars(2)
     assert len(result) == 2
-    result[0][CarAttribute.MAKE.value] == 'make3'
-    result[1][CarAttribute.MAKE.value] == 'make1'
+    assert result[0][CarAttribute.MAKE.value] == 'make3'
+    assert result[1][CarAttribute.MAKE.value] == 'make1'
     db_handler.reset()
