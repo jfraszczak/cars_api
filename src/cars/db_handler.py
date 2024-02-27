@@ -82,14 +82,13 @@ class DBHandler:
     
     def get_popular_cars(self, top_n: int) -> list[dict[str, str]]:
         cursor = self._db[self._collection_name].aggregate([
+            {'$sort': {CarAttribute.RATES_NUM.value: -1}},
+            {'$limit': top_n},
             {'$project': {
                 '_id': 0,
                 CarAttribute.MAKE.value: '$_id.{}'.format(CarAttribute.MAKE.value),
                 CarAttribute.MODEL.value: '$_id.{}'.format(CarAttribute.MODEL.value)
             }},
-
-            {'$sort': {CarAttribute.RATES_NUM.value: -1}},
-            {'$limit': top_n}
         ])
 
         return list(cursor)
