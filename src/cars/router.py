@@ -23,9 +23,10 @@ async def post_cars(car: Car, db_handler: DBHandler=Depends(get_db_handler), veh
     return car
     
 @router.post("/rate")
-async def post_rate(car_rate: CarRate, db_handler=Depends(get_db_handler)):
-    try: 
-        db_handler.update_rate(car_rate.make, car_rate.model, car_rate.rate)
+async def post_rate(car_rate: CarRate, db_handler=Depends(get_db_handler), vehicle_api_handler: VehicleAPIHandlerInterface=Depends(VehicleAPIHandler)):
+    try:
+        make, model = vehicle_api_handler.get_valid_vehicle(car_rate.make, car_rate.model)
+        db_handler.update_rate(make, model, car_rate.rate)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
