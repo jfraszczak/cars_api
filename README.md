@@ -26,6 +26,6 @@ Example document stored in the database looks as follows:
 
 Since these values are incremented using $inc operation which in MongoDB is atomic there is no risk of interruption by other concurrent update operation.
 Moreover, int values can be stored using 64 bits so there should be no risk of out of range error. 
-It was also assumed that number of updates would be reasonably small, but in case of heavy load of updates of the same car record possibly other approach would have to be
-considered, optimized for writes. Potentially new collection/table would be required to store only ratings but it this scenario calculartion of average would be more expensive.
-Furthermore, index was created on attribute representing number of ratings to improve sorting performance for /popular endpoint. 
+It was also assumed that number of updates would be reasonably small, but in case of heavy load of updates of the same car record possibly other approach, optimized for writes, would have to be
+considered. Potentially new collection/table would be required to store only ratings but in this scenario calculation of average would be more expensive.
+Furthermore, index was created on attribute representing number of ratings to improve sorting performance for /popular endpoint.
